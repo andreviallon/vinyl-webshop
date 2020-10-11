@@ -26,7 +26,7 @@ export interface Track {
   length: string;
 }
 
-export interface Vinyl {
+export interface IAlbum {
   _id: string;
   name: string;
   artist: string;
@@ -42,7 +42,7 @@ export interface Vinyl {
   numReviews: number,
 }
 
-export const products: Vinyl[] = [
+export const albums: IAlbum[] = [
   {
     _id: '1',
     name: 'Random Access Memories',
@@ -65,7 +65,7 @@ export const products: Vinyl[] = [
     totalLength: '74:25',
     genres: [Genre.FUNK, Genre.DISCO, Genre.ELECTRONIC],
     releaseDate: '17 May 2013',
-    image: '/images/Random_Access_Memories.jpg',
+    image: 'Random_Access_Memories.jpg',
     description: 'Random Access Memories is the fourth studio album by French electronic duo Daft Punk, released on 17 May 2013 by Daft Life and Columbia Records. The album pays tribute to late 1970s and early 1980s American music, particularly from Los Angeles. This theme is reflected in the album\'s packaging, as well as its promotional campaign, which included billboards, television advertisements, and a web series. Recording took place at Henson Recording Studios, Conway Recording Studios and Capitol Studios in California, Electric Lady Studios in New York City, and Gang Recording Studio in Paris, France.',
     price: 19.99,
     countInStock: 10,

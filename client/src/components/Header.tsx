@@ -10,8 +10,8 @@ import ShoppingCard from '@material-ui/icons/ShoppingCart';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
-			display: 'flex',
-			justifyContent: 'space-between'
+		display: 'flex',
+		justifyContent: 'space-between'
     },
     menuButton: {
       marginRight: theme.spacing(1),
@@ -29,7 +29,7 @@ const Header = () => {
 					Vinyl Shop
 				</Typography>
 				<div>
-					<Button color="inherit">
+					<Button color="inherit" className={classes.menuButton}>
 						<ShoppingCard className={classes.menuButton} />
 						Cart
 					</Button>

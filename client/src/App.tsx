@@ -1,6 +1,4 @@
 import React from 'react';
-import './App.css';
-
 import Header from './components/Header';
 import PageWrapper from './components/PageWrapper';
 import HomePage from './pages/HomePage';
