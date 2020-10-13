@@ -10,14 +10,7 @@ interface Props {
 const AlbumPage = ({ match }: RouteComponentProps<Props>) => {
     const album = albums.find(a => a._id === match.params.id);
 
-    const showAlbum = () => {
-        if (album) {
-            return <AlbumDetails album={album} />
-        } else {
-            return 'Oops... It seems that there isn\'t any album at this URL'
-        }
-
-    }
+    const showAlbum = () => album ? <AlbumDetails album={album} /> : 'Oops... It seems that there isn\'t any album at this URL'
     return (
         <div>
             {showAlbum()}

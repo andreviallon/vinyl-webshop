@@ -60,6 +60,7 @@ const AlbumDetails: React.FC<Props> = ({ album }) => {
                             className={classes.media}
                             src={album?.image}
                             title="Album image"
+                            alt={album.name}
                         />
                         </div>
                     </Paper>
