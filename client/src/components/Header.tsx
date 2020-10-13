@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCard from '@material-ui/icons/ShoppingCart';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,18 +26,24 @@ const Header = () => {
 	return (
 		<AppBar position="static">
 			<Toolbar className={classes.header}>
-				<Typography variant="h6">
-					Vinyl Shop
-				</Typography>
+				<Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+					<Typography variant="h6">
+						Vinyl Shop
+					</Typography>
+				</Link>
 				<div>
-					<Button color="inherit" className={classes.menuButton}>
-						<ShoppingCard className={classes.menuButton} />
-						Cart
-					</Button>
-					<Button color="inherit">
-						<AccountCircle className={classes.menuButton} />
-						Login
-					</Button>
+					<Link to='/cart' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+						<Button color="inherit" className={classes.menuButton}>
+							<ShoppingCard className={classes.menuButton} />
+							Cart
+						</Button>
+					</Link>
+					<Link to='/login' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+						<Button color="inherit">
+							<AccountCircle className={classes.menuButton} />
+							Login
+						</Button>
+					</Link>
 				</div>
 			</Toolbar>
 		</AppBar>
