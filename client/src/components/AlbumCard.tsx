@@ -2,22 +2,22 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { IAlbum } from '../mock/albums';
+import Rating from './Rating';
 
 interface Props {
   album: IAlbum;
 }
 
-const useStyles = makeStyles({
-  media: {
-    width: '100%',
-    objectFit: 'cover'
-  },
-  price: {
-      marginTop: '0.5rem'
-  }
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    media: {
+        width: '100%',
+        objectFit: 'cover'
+    }
+  })
+);
 
 const AlbumCard: React.FC<Props> = ({ album }) => {
     const classes = useStyles();
@@ -35,12 +35,10 @@ const AlbumCard: React.FC<Props> = ({ album }) => {
                 <Typography variant="body2" color="textSecondary">
                     {album.artist}
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
-                    {album.rating} from ${album.numReviews}
-                </Typography>
-                <Typography variant="h6" className={classes.price}>
+                <Typography variant="h6">
                     ${album.price}
                 </Typography>
+                <Rating rating={album.rating} numReviews={album.numReviews} />
             </CardContent>
         </Card>
     )

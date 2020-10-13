@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     menuButton: {
       marginRight: theme.spacing(1),
     }
-  }),
+  })
 );
 
 const Header = () => {
