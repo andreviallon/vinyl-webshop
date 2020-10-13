@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     width: '100%',
     objectFit: 'cover'
   },
+  price: {
+      marginTop: '0.5rem'
+  }
 });
 
 const AlbumCard: React.FC<Props> = ({ album }) => {
@@ -29,10 +32,13 @@ const AlbumCard: React.FC<Props> = ({ album }) => {
                 <Typography variant="h6" component="h2">
                     {album.name}
                 </Typography>
-                <Typography color="textSecondary">
+                <Typography variant="body2" color="textSecondary">
                     {album.artist}
                 </Typography>
-                <Typography color="textSecondary">
+                <Typography variant="body2" color="textSecondary">
+                    {album.rating} from ${album.numReviews}
+                </Typography>
+                <Typography variant="h6" className={classes.price}>
                     ${album.price}
                 </Typography>
             </CardContent>
