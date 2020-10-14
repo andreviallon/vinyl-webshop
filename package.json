@@ -1,0 +1,23 @@
+{
+  "name": "vinyl-webshop",
+  "version": "1.0.0",
+  "description": "MERN webshop app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreviallon/vinyl-webshop.git"
+  },
+  "author": "Andre Viallon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andreviallon/vinyl-webshop/issues"
+  },
+  "homepage": "https://github.com/andreviallon/vinyl-webshop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

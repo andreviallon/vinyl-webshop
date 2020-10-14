@@ -1,5 +1,5 @@
 import React from 'react';
-import { albums } from '../mock/albums';
+import { albums } from '../../../server/data/albums';
 import { RouteComponentProps } from 'react-router-dom';
 import AlbumDetails from '../components/AlbumDetails';
 
