@@ -175,4 +175,4 @@ const albums = [
   },
 ]
 
-module.exports = albums;
+export default albums;

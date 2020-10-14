@@ -1,6 +1,6 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const albums = require('./data/albums');
+import express from 'express';
+import dotenv from 'dotenv';
+import albums from './data/albums.js';
 
 dotenv.config();
 
