@@ -1,5 +1,5 @@
 import React from 'react';
-import { IAlbum } from '../mock/albums';
+import { IAlbum } from '../models/AlbumModel';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper'
@@ -73,12 +73,12 @@ const AlbumDetails: React.FC<Props> = ({ album }) => {
                     <Typography variant="h6" component="p" color="textSecondary">
                         {album?.artist}
                     </Typography>
-                    <Rating rating={album.rating} numReviews={album.numReviews} />
+                    {album.rating && album.numReviews && <Rating rating={album.rating} numReviews={album.numReviews} />}
                     <Typography variant="body1" component="p" color="textSecondary" className={classes.description}>
                         {album?.description}
                     </Typography>
                     <div className={classes.flex}>
-                        {album?.genres.map((genre: string, index: number) =>
+                        {album.genres && album?.genres.map((genre: string, index: number) =>
                             <Typography variant="overline" component="p" key={index} className={classes.genre}>
                                 {genre}
                             </Typography>

@@ -2,7 +2,7 @@ import { makeStyles, Theme, createStyles, Typography } from '@material-ui/core';
 import React from 'react';
 
 interface Props {
-    countInStock: number;
+    countInStock: number | undefined;
 }
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { IAlbum } from '../mock/albums';
+import { IAlbum } from '../models/AlbumModel';
 import Rating from './Rating';
 import { Link } from 'react-router-dom';
 
@@ -41,7 +41,7 @@ const AlbumCard: React.FC<Props> = ({ album }) => {
                     <Typography variant="h6">
                         ${album.price}
                     </Typography>
-                    <Rating rating={album.rating} numReviews={album.numReviews} />
+                    {album.rating && album.numReviews && <Rating rating={album.rating} numReviews={album.numReviews} />}
                 </CardContent>
             </Card>
         </Link>
