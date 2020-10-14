@@ -17,7 +17,7 @@ const AlbumPage = ({ match }: RouteComponentProps<Props>) => {
 		};
 
 		fetchAlbum();
-    }, []);
+    }, [match]);
 
     const showAlbum = () => album !== undefined ? <AlbumDetails album={album} /> : 'Oops... It seems that there isn\'t any album at this URL';
 
