@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import InStock from './InStock';
 import Rating from './Rating';
+import Tracks from './Tracks';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -90,6 +91,9 @@ const AlbumDetails: React.FC<Props> = ({ album }) => {
                         <Button variant="contained" color="primary" disableElevation className={classes.button}>Add To Cart</Button>
                         <InStock countInStock={album?.countInStock} />
                     </div>
+                </Grid>
+                <Grid item xs={12}>
+                    <Tracks tracks={album?.tracks}/>
                 </Grid>
             </Grid>
         </div>

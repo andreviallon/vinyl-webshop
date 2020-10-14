@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import AlbumCard from './AlbumCard';
-import { albums, IAlbum } from '../../../server/data/albums';
+import { albums, IAlbum } from '../mock/albums';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
