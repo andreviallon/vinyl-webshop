@@ -36,15 +36,11 @@ const Tracks: React.FC<Props> = ({ tracks }) => {
 			</TableHead>
 			<TableBody>
 				{tracks?.map((track, index) => (
-				<TableRow key={index}>
-					<TableCell className={classes.smallColumn}>
-					{index + 1}
-					</TableCell>
-					<TableCell align="left">
-					{track.name}
-					</TableCell>
-					<TableCell>{track.length}</TableCell>
-				</TableRow>
+					<TableRow key={index}>
+						<TableCell className={classes.smallColumn}>{track.trackNumber}</TableCell>
+						<TableCell align="left">{track.name}</TableCell>
+						<TableCell>{track.length}</TableCell>
+					</TableRow>
 				))}
 			</TableBody>
 			</Table>

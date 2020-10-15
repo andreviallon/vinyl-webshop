@@ -24,6 +24,7 @@ export enum Genre {
 export interface Track {
   name?: string;
   length?: string;
+  trackNumber?: number;
 }
 
 export interface IAlbum {
@@ -31,9 +32,7 @@ export interface IAlbum {
   name?: string;
   artist?: string;
   tracks?: Track[];
-  totalLength?: string;
   genres?: Genre[];
-  releaseDate?: string;
   image?: string;
   description?: string;
   price?: number,
