@@ -8,13 +8,11 @@ import AlbumPage from './pages/AlbumPage';
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Header />
-        <PageWrapper>
-          <Route path='/' component={HomePage} exact />
-          <Route path='/album/:id' component={AlbumPage} />
-        </PageWrapper>
-      </div>
+      <Header />
+      <PageWrapper>
+        <Route path='/' component={HomePage} exact />
+        <Route path='/album/:id' component={AlbumPage} />
+      </PageWrapper>
     </Router>
   );
 }
