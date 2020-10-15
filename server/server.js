@@ -1,8 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import colors from 'colors';
 import albums from './data/albums.js';
 
 dotenv.config();
+
+connectDB();
 
 const app = express();
 
