@@ -29,7 +29,7 @@ const albumSchema = mongoose.Schema({
         required: true,
     },
     tracks: [tracksSchema],
-    genre: {
+    genres: {
         type: Array,
         required: true
     },

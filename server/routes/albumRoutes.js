@@ -1,5 +1,5 @@
 import express from 'express';
-import asyncHandler from 'expressAsyncHandler';
+import asyncHandler from 'express-async-handler';
 import Album from '../models/albumModel.js';
 
 const router = express.Router();
