@@ -6,6 +6,7 @@ export enum Genre {
   DANCE = 'Dance',
   DISCO = 'Disco',
   ELECTRONIC = 'Electronic',
+  FOLK = 'Folk',
   FUNK = 'Funk',
   HIP_HOP = 'Hip-Hop',
   INDIE = 'Indie',

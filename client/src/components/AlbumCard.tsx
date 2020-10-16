@@ -13,9 +13,15 @@ interface Props {
 
 const useStyles = makeStyles(() =>
     createStyles({
+        card: {
+            height: '100%'
+        },
         media: {
             width: '100%',
             objectFit: 'cover'
+        },
+        price: {
+            margin: '0.5rem 0 0.2rem'
         }
     })
 );
@@ -24,7 +30,7 @@ const AlbumCard: React.FC<Props> = ({ album }) => {
     const classes = useStyles();
     return (
         <Link to={`album/${album._id}`} style={{ textDecoration: 'none' }}>
-            <Card>
+            <Card className={classes.card}>
                 <img
                     className={classes.media}
                     src={album.image}
@@ -38,7 +44,7 @@ const AlbumCard: React.FC<Props> = ({ album }) => {
                     <Typography variant="body2" color="textSecondary">
                         {album.artist}
                     </Typography>
-                    <Typography variant="h6">
+                    <Typography variant="h6" className={classes.price}>
                         ${album.price}
                     </Typography>
                     {album.rating && album.numReviews && <Rating rating={album.rating} numReviews={album.numReviews} />}
