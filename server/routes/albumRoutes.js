@@ -15,7 +15,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
     if (album) {
         res.json(album);
     } else {
-        res.status(404).json({ message: 'Album not found' });
+        res.status(404);
+        throw new Error('Album not found');
     }
 }));
 
