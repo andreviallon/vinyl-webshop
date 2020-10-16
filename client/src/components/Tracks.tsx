@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Track } from '../models/AlbumModel';
+import { ITrack } from '../models/AlbumModel';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-	tracks: Track[] | undefined
+	tracks: ITrack[] | undefined
 }
 
 const Tracks: React.FC<Props> = ({ tracks }) => {

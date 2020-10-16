@@ -22,7 +22,7 @@ export enum Genre {
   SOUND_TRACK = 'Sound Track'
 }
 
-export interface Track {
+export interface ITrack {
   name?: string;
   length?: string;
   trackNumber?: number;
@@ -32,7 +32,7 @@ export interface IAlbum {
   _id?: string;
   name?: string;
   artist?: string;
-  tracks?: Track[];
+  tracks?: ITrack[];
   genres?: Genre[];
   image?: string;
   description?: string;
