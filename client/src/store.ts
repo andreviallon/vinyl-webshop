@@ -3,12 +3,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { albumListReducer } from './reducers/albumReducers';
 
-const middlewares = [thunk];
-
-const reducer = combineReducers({
-    albumList: albumListReducer
+export const rootReducer = combineReducers({
+  albumList: albumListReducer
 });
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)));
+export type RootState = ReturnType<typeof rootReducer>
+
+const middlewares = [thunk];
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...middlewares)));
 
 export default store

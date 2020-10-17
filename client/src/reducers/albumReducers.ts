@@ -13,7 +13,7 @@ export const albumListReducer = (state: AlbumState = initialAlbumState, action: 
       return { ...state, loading: true };
 
     case actionTypes.PRODUCT_LIST_SUCCESS:
-      return { ...state, albums: action.albums, loading: false };
+      return { ...state, albums: action.albums, loading: false, error: undefined };
       
     case actionTypes.PRODUCT_LIST_FAIL:
       return { ...state, loading: false, error: action.error };
