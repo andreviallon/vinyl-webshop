@@ -44,9 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-    album: IAlbum;
+    album: IAlbum | undefined;
 }
-
 
 const AlbumDetails: React.FC<Props> = ({ album }) => {
     const classes = useStyles();
@@ -61,7 +60,7 @@ const AlbumDetails: React.FC<Props> = ({ album }) => {
                             className={classes.media}
                             src={album?.image}
                             title="Album image"
-                            alt={album.name}
+                            alt={album?.name}
                         />
                         </div>
                     </Paper>
@@ -73,12 +72,12 @@ const AlbumDetails: React.FC<Props> = ({ album }) => {
                     <Typography variant="h6" component="p" color="textSecondary">
                         {album?.artist}
                     </Typography>
-                    {album.rating && album.numReviews && <Rating rating={album.rating} numReviews={album.numReviews} />}
+                    {album?.rating && album?.numReviews && <Rating rating={album?.rating} numReviews={album?.numReviews} />}
                     <Typography variant="body1" component="p" color="textSecondary" className={classes.description}>
                         {album?.description}
                     </Typography>
                     <div className={classes.flex}>
-                        {album.genres && album?.genres.map((genre: string, index: number) =>
+                        {album?.genres && album?.genres.map((genre: string, index: number) =>
                             <Typography variant="overline" component="p" key={index} className={classes.genre}>
                                 {genre}
                             </Typography>

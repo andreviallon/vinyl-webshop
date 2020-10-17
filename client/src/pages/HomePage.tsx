@@ -31,11 +31,9 @@ const HomePage = () => {
 			{loading ? (
 				<Loader />
 			) : error ? (
-				<Typography variant="h5">
-					<SnackbarMessage severity={severity.ERROR} message={error}/>
-				</Typography>
+				<SnackbarMessage severity={severity.ERROR} message={error} />
 			) : (
-				<LatestAlbums albums={albums}/>
+				<LatestAlbums albums={albums} />
 			)}
         </>
     )

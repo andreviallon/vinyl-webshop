@@ -5,7 +5,7 @@ import AlbumCard from './AlbumCard';
 import { IAlbum } from '../models/AlbumModel';
 
 interface Props {
-	albums: IAlbum[] | undefined
+	albums: IAlbum[] | undefined;
 }
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import AlbumDetails from '../components/AlbumDetails';
-import axios from 'axios';
+import { useDispatch, useSelector }  from 'react-redux';
+import { listAlbumDetails } from '../actions/albumActions';
+import { RootState } from '../store';
+import Loader from '../components/Loader';
+import SnackbarMessage, { severity } from '../components/SnackbarMessage';
 
 interface Props {
     id: string;
 }
 
 const AlbumPage = ({ match }: RouteComponentProps<Props>) => {
-    const [album, setAlbum] = useState({});
+    const dispatch = useDispatch();
+    const { album, reviews, error, loading } = useSelector((state: RootState) => state.albumDetails);
 
     useEffect(() => {
-		const fetchAlbum = async () => {
-			const { data } = await axios.get(`/api/albums/${match.params.id}`);
-			setAlbum(data);
-		};
-
-		fetchAlbum();
-    }, [match]);
-
-    const showAlbum = () => album !== undefined ? <AlbumDetails album={album} /> : 'Oops... It seems that there isn\'t any album at this URL';
+        dispatch(listAlbumDetails(match.params.id));
+    }, [dispatch, match]);
 
     return (
         <>
-            {showAlbum()}
+            {loading ? (
+				<Loader />
+			) : error ? (
+				<SnackbarMessage severity={severity.ERROR} message={error} />
+			) : (
+				<AlbumDetails album={album} />
+			)}
         </>
     )
 }
