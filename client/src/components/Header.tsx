@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		justifyContent: 'space-between'
     },
     menuButton: {
-      marginRight: theme.spacing(1),
+      marginRight: theme.spacing(1)
     }
   })
 );

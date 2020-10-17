@@ -18,16 +18,16 @@ const useStyles = makeStyles((theme: Theme) =>
             marginRight: theme.spacing(1)
         },
         bold: {
-            fontWeight: theme.typography.fontWeightBold,
+            fontWeight: theme.typography.fontWeightBold
         },
         available: {
-            color: theme.palette.success.main,
+            color: theme.palette.success.main
         },
         unavailable: {
             color: theme.palette.error.main
         },
         bgAvailable: {
-            background: theme.palette.success.main,
+            background: theme.palette.success.main
         },
         bgUnavailable: {
             background: theme.palette.error.main

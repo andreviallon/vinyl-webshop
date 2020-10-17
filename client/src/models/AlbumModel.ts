@@ -36,8 +36,8 @@ export interface IAlbum {
   genres?: Genre[];
   image?: string;
   description?: string;
-  price?: number,
-  countInStock?: number,
-  rating?: number,
-  numReviews?: number,
+  price?: number;
+  countInStock?: number;
+  rating?: number;
+  numReviews?: number;
 }

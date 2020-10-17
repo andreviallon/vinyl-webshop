@@ -4,7 +4,7 @@ import AlbumDetails from '../components/AlbumDetails';
 import axios from 'axios';
 
 interface Props {
-    id: string
+    id: string;
 }
 
 const AlbumPage = ({ match }: RouteComponentProps<Props>) => {

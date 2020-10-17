@@ -12,13 +12,13 @@ import { ITrack } from '../models/AlbumModel';
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		smallColumn: {
-			width: theme.spacing(1),
+			width: theme.spacing(1)
 		}
 	})
 );
 
 interface Props {
-	tracks: ITrack[] | undefined
+	tracks: ITrack[] | undefined;
 }
 
 const Tracks: React.FC<Props> = ({ tracks }) => {

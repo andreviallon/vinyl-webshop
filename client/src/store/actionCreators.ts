@@ -5,7 +5,7 @@ import { AlbumAction, DispatchType } from './types';
 export function addAlbum(album: IAlbum) {
 	const action: AlbumAction = {
 		type: actionTypes.ADD_ALBUM,
-    	album,
+    	album
   	};
 
   	return (dispatch: DispatchType) => {
@@ -16,7 +16,7 @@ export function addAlbum(album: IAlbum) {
 export function removeAlbum(album: IAlbum) {
   	const action: AlbumAction = {
     	type: actionTypes.REMOVE_ALBUM,
-    	album,
+    	album
   	};
 
     return (dispatch: DispatchType) => {

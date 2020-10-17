@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-    album: IAlbum
+    album: IAlbum;
 }
 
 
