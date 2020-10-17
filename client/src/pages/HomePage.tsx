@@ -5,18 +5,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LatestAlbums from '../components/LatestAlbums';
 import { RootState } from '../store';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from '../components/Loader';
+import SnackbarMessage, { severity } from '../components/SnackbarMessage';
 
 const useStyles = makeStyles({
 	latestArrivals: {
     	marginBottom: '2rem'
-  	},
-  	spinner: {
-		width: '150px !important',
-		height: '150px !important',
-		margin: '4rem auto',
-		display: 'block'
-	}
+  	}
 });
 
 const HomePage = () => {
@@ -29,20 +24,20 @@ const HomePage = () => {
 	}, [dispatch]);
 
     return (
-        <div>
+        <>
             <Typography variant="h4" className={classes.latestArrivals}>
                 Latest Arrivals
             </Typography>
 			{loading ? (
-				<CircularProgress className={classes.spinner} />
+				<Loader />
 			) : error ? (
 				<Typography variant="h5">
-					{error}
+					<SnackbarMessage severity={severity.ERROR} message={error}/>
 				</Typography>
 			) : (
 				<LatestAlbums albums={albums}/>
 			)}
-        </div>
+        </>
     )
 }
 
