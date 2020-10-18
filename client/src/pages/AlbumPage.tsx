@@ -11,13 +11,14 @@ interface Props {
     id: string;
 }
 
-const AlbumPage = ({ match }: RouteComponentProps<Props>) => {
+const AlbumPage = ({ history, match }: RouteComponentProps<Props>) => {
     const dispatch = useDispatch();
     const { album, reviews, error, loading } = useSelector((state: RootState) => state.albumDetails);
+    const id: string = match.params.id;
 
     useEffect(() => {
-        dispatch(listAlbumDetails(match.params.id));
-    }, [dispatch, match]);
+        dispatch(listAlbumDetails(id));
+    }, [dispatch]);
 
     return (
         <>
@@ -26,7 +27,7 @@ const AlbumPage = ({ match }: RouteComponentProps<Props>) => {
 			) : error ? (
 				<SnackbarMessage severity={severity.ERROR} message={error} />
 			) : (
-				<AlbumDetails album={album} />
+				<AlbumDetails album={album} history={history} id={id} />
 			)}
         </>
     )

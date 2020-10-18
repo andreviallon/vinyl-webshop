@@ -30,8 +30,6 @@ export const initialAlbumDetailsState: AlbumDetailsState = {
 };
 
 export const albumDetailsReducer = (state: AlbumDetailsState = initialAlbumDetailsState, action: AlbumDetailsAction): AlbumDetailsState => {
-  console.log('action', action);
-  
   switch (action.type) {
     case actionTypes.ALBUM_DETAILS_REQUEST:
       return { ...state, loading: true };
