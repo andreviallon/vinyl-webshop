@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import AlbumDetails from '../components/AlbumDetails';
 import { useDispatch, useSelector }  from 'react-redux';
-import { listAlbumDetails } from '../actions/albumActions';
-import { RootState } from '../store';
+import { listAlbumDetails } from '../state/albumDetails/albumDetailsActions';
+import { RootState } from '../state/store';
 import Loader from '../components/Loader';
 import SnackbarMessage, { severity } from '../components/SnackbarMessage';
+import { AlbumDetailsState } from '../state/albumDetails/albumDetailsStateModel';
 
 interface Props {
     id: string;
@@ -13,7 +14,7 @@ interface Props {
 
 const AlbumPage = ({ history, match }: RouteComponentProps<Props>) => {
     const dispatch = useDispatch();
-    const { album, reviews, error, loading } = useSelector((state: RootState) => state.albumDetails);
+    const { album, error, loading } = useSelector((state: RootState) => state.albumDetails as AlbumDetailsState);
     const id: string = match.params.id;
 
     useEffect(() => {

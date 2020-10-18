@@ -41,33 +41,3 @@ export interface IAlbum {
   rating?: number;
   numReviews?: number;
 }
-
-export type AlbumListState = {
-  albums?: IAlbum[];
-  loading: boolean;
-  error?: string;
-};
-
-export type AlbumListAction = {
-  type: string;
-  albums?: IAlbum[];
-  error?: string;
-};
-
-export type AlbumListDispatchType = (args: AlbumListAction) => AlbumListAction;
-
-export type AlbumDetailsState = {
-  album?: IAlbum;
-  reviews?: [];
-  loading: boolean;
-  error?: string;
-};
-
-export type AlbumDetailsAction = {
-  type: string;
-  album?: IAlbum;
-  reviews?: [];
-  error?: string;
-};
-
-export type AlbumDetailsDispatchType = (args: AlbumDetailsAction) => AlbumDetailsAction;

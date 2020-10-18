@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listAlbums } from '../actions/albumActions';
+import { listAlbums } from '../state/albumList/albumListActions';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LatestAlbums from '../components/LatestAlbums';
-import { RootState } from '../store';
+import { RootState } from '../state/store';
 import Loader from '../components/Loader';
 import SnackbarMessage, { severity } from '../components/SnackbarMessage';
 

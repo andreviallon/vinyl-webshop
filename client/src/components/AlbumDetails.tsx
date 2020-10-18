@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IAlbum } from '../models/AlbumModel';
+import { IAlbum } from '../models/albumModel';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper'

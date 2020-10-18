@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import AlbumCard from './AlbumCard';
-import { IAlbum } from '../models/AlbumModel';
+import { IAlbum } from '../models/albumModel';
 
 interface Props {
 	albums: IAlbum[] | undefined;
