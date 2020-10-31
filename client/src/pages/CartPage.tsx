@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import SnackbarMessage from '../components/SnackbarMessage';
 import { addToCart } from '../state/cart/cartActions';
 import { IState } from '../state/store';
+import CartDetails from '../components/CartDetails';
 
 interface Props {
     id: string;
@@ -15,6 +15,14 @@ const CartPage = ({ match, location, history }: RouteComponentProps<Props>) => {
     const dispatch = useDispatch();
     const { cartItems } = useSelector((state: IState) => state.cart);
 
+    const removeFromCartHandler = (id: string) => {
+        // dispatch(removeFromCart(id))
+    }
+
+    const checkoutHandler = () => {
+        history.push('/login?redirect=shipping')
+    }
+
     useEffect(() => {
         if(albumId) {
             dispatch(addToCart(albumId, quantity));
@@ -24,7 +32,7 @@ const CartPage = ({ match, location, history }: RouteComponentProps<Props>) => {
 
     return (
         <div>
-            Cart
+            <CartDetails cartItems={cartItems}/>
         </div>
     )
 }

@@ -12,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import { match } from 'react-router-dom';
 import * as H from "history";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         addToCart: {
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'center'
         },
         button: {
             marginRight: theme.spacing(2),
@@ -70,7 +69,6 @@ const AlbumDetails: React.FC<Props> = ({ album, history, id }) => {
 
     const addToCartHandler = () => {
         history.push(`/cart/${id}?qty=${quantity}`);
-        // history.push(`/`);
     };
 
     return (
@@ -120,7 +118,7 @@ const AlbumDetails: React.FC<Props> = ({ album, history, id }) => {
                                     label="Quantity"
                                 >
                                     {[...Array(album.countInStock).keys()].map(count => (
-                                        <MenuItem value={count + 1} key={count + 1 } >{count + 1}</MenuItem>
+                                        <MenuItem value={count + 1} key={count + 1}>{count + 1}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>

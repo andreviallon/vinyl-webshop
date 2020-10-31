@@ -1,4 +1,4 @@
-import { IAlbum } from './../../models/albumModel';
+import { IAlbum } from "../../models/albumModel";
 
 export type AlbumListState = {
   albums?: IAlbum[];
