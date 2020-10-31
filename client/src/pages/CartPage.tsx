@@ -10,29 +10,9 @@ interface Props {
 }
 
 const CartPage = ({ match, location, history }: RouteComponentProps<Props>) => {
-    const albumId = match.params.id;
-    const quantity = location.search ? Number(location.search.split('=')[1]) : 1;
-    const dispatch = useDispatch();
-    const { cartItems } = useSelector((state: IState) => state.cart);
-
-    const removeFromCartHandler = (id: string) => {
-        // dispatch(removeFromCart(id))
-    }
-
-    const checkoutHandler = () => {
-        history.push('/login?redirect=shipping')
-    }
-
-    useEffect(() => {
-        if(albumId) {
-            dispatch(addToCart(albumId, quantity));
-        }
-    }, [dispatch, albumId, quantity]);
-
-
     return (
         <div>
-            <CartDetails cartItems={cartItems}/>
+            <CartDetails match={match} location={location} history={history} />
         </div>
     )
 }

@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ICartItem } from '../models/cartModel';
-import SnackbarMessage, { severity } from './SnackbarMessage';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { IconButton, InputBase, ListItemText, Select, Typography, withStyles } from '@material-ui/core';
+import { IconButton, ListItemText, Select, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider/Divider';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar/Avatar';
 import FormControl from '@material-ui/core/FormControl/FormControl';
-import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import DeleteIcon from '@material-ui/icons/Delete';
+import * as H from "history";
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../state/cart/cartActions';
+import { IState } from '../state/store';
+import Button from '@material-ui/core/Button/Button';
+import { ICartItem } from '../models/cartModel';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		root: {
-			
+		header: {
+			marginBottom: theme.spacing(2),
+			display: 'flex',
+			justifyContent: 'space-between'
 		},
 		albumCover: {
 			width: 70,
@@ -37,62 +42,90 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		formControl: {
 			margin: theme.spacing(1),
-			minWidth: 120
+			minWidth: 80
 		},
-		deleteItem: {
-			marginTop: 10
+		flex: {
+			flex: '1'
 		}
-	}),
+	})
 );
 
 interface Props {
-    cartItems: ICartItem[];
+	match: any;
+	location: H.Location;
+	history: H.History;
 }
 
-const CartDetails: React.FC<Props> = ({ cartItems }) => {
+const CartDetails: React.FC<Props> = ({ match, location, history }) => {
 	const classes = useStyles();
 
-	const [quantity, setQuantity] = useState(1);
+	const albumId = match.params.id;
+    const quantity = location.search ? Number(location.search.split('=')[1]) : 1;
+    const dispatch = useDispatch();
+    const { cartItems } = useSelector((state: IState) => state.cart);
 
-	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-		setQuantity(event.target.value as number);
-	};
+    const removeFromCartHandler = (id?: string) => {
+        // dispatch(removeFromCart(id))
+    }
+
+    const checkoutHandler = () => {
+        history.push('/login?redirect=shipping')
+	}
+
+
+    useEffect(() => {
+        if(albumId) {
+            dispatch(addToCart(albumId, quantity));
+        }
+    }, [dispatch, albumId, quantity]);
+
 
     return (
+		<>
 		<Grid container spacing={3}>
-			<Grid item xs={12} md={8}>
-				<Typography component="h4" variant="h4" className={classes.title}>Shopping Cart</Typography>
+			<Grid item xs={12}>
+				<div className={classes.header}>
+					<Typography component="h5" variant="h5" className={classes.title}>Shopping Cart ({cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)})</Typography>
+					<Button variant="contained" color="primary" disableElevation>
+						Proceed to checkout
+						${cartItems.reduce((acc, item) => acc + item.quantity * item.album.price, 0).toFixed(2)}
+					</Button>
+				</div>
 				{cartItems.length ? (
 					<List>
-						{cartItems.map(cartItem => (
-							<div key={cartItem.album._id}>
-								<ListItem alignItems="flex-start">
+						{cartItems.map((cartItem, index) => (
+							<div key={index}>
+								<ListItem>
 									<ListItemAvatar>
 										<Avatar className={classes.albumCover} alt={cartItem.album.name} src={cartItem.album.image} />
 									</ListItemAvatar>
 									<ListItemText
+										className={classes.flex}
 										primary={cartItem.album.name}
 										secondary={
 											<React.Fragment>
 												<Typography component="span" variant="body1" color="textPrimary"></Typography>
-												${cartItem.album.price}
+												{cartItem.album.artist}
+												
 											</React.Fragment>
 										}
 									/>
-									<FormControl variant="outlined" className={classes.quantity}>
-										<InputLabel id="quantity">Quantity</InputLabel>
+									<Typography component="span" variant="body1" color="textPrimary" className={classes.flex}>
+										${cartItem.album.price}
+									</Typography>
+									<FormControl className={classes.formControl}>
 										<Select
-											labelId="quantity"
-											value={quantity}
-											onChange={handleChange}
-											label="Quantity"
+										value={quantity}
+										onChange={ (e) =>dispatch(addToCart(cartItem.album._id, Number(e.target.value))) }
+										displayEmpty
+										inputProps={{ "aria-label": "Without label" }}
 										>
 											{[...Array(cartItem.album.countInStock).keys()].map(count => (
 												<MenuItem value={count + 1} key={count + 1}>{count + 1}</MenuItem>
 											))}
 										</Select>
 									</FormControl>
-									<IconButton aria-label="delete" className={classes.deleteItem}>
+									<IconButton aria-label="delete" onClick={() => removeFromCartHandler(cartItem.album._id)}>
 										<DeleteIcon />
 									</IconButton>
 								</ListItem>
@@ -105,6 +138,7 @@ const CartDetails: React.FC<Props> = ({ cartItems }) => {
 				)}
 			</Grid>
 		</Grid>
+		</>
     )
 }
 

@@ -13,10 +13,10 @@ export const cartReducer = (state: CartState = initialCartState, action: CartAct
         case actionTypes.CART_ADD_ITEM:
             const item = action.cartItem;
 
-            const existItem = state.cartItems?.find( cartItem => cartItem.album === item.album );
+            const existItem = state.cartItems?.find(cartItem => cartItem.album === item.album );
 
             if (existItem) {
-                return { ...state, cartItems: state.cartItems.map(cartItem => cartItem.album._id === existItem.album._id ? item : cartItem ) };
+                return { ...state, cartItems: state.cartItems.map(cartItem => cartItem.album === existItem.album ? item : cartItem ) };
             } else {
                 return { ...state, cartItems: [...state.cartItems, item] };
             }

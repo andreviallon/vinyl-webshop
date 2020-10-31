@@ -29,15 +29,15 @@ export interface ITrack {
 }
 
 export interface IAlbum {
-  _id?: string;
-  name?: string;
-  artist?: string;
-  tracks?: ITrack[];
-  genres?: Genre[];
-  image?: string;
-  description?: string;
-  price?: number;
-  countInStock?: number;
-  rating?: number;
-  numReviews?: number;
+  _id: string;
+  name: string;
+  artist: string;
+  tracks: ITrack[];
+  genres: Genre[];
+  image: string;
+  description: string;
+  price: number;
+  countInStock: number;
+  rating: number;
+  numReviews: number;
 }

@@ -2,7 +2,7 @@ import { AlbumDetailsState, AlbumDetailsAction } from "./albumDetailsStateModel"
 import * as actionTypes from "./albumDetailsActionTypes";
 
 export const initialAlbumDetailsState: AlbumDetailsState = {
-  album: {},
+  album: undefined,
   reviews: [],
   loading: false,
   error: undefined
