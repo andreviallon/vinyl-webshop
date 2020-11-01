@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../state/cart/cartActions';
 import { IState } from '../state/store';
 import Button from '@material-ui/core/Button/Button';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -41,6 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			minWidth: 80
 		},
 		flex: {
+			flex: '1'
+		},
+		flexContainer: {
+			display: 'flex',
 			flex: '1'
 		}
 	})
@@ -92,20 +97,32 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
 							<div key={index}>
 								<Divider component="li" />
 								<ListItem>
-									<ListItemAvatar>
-										<Avatar className={classes.albumCover} alt={cartItem.album.name} src={cartItem.album.image} />
-									</ListItemAvatar>
-									<ListItemText
-										className={classes.flex}
-										primary={cartItem.album.name}
-										secondary={
-											<React.Fragment>
-												<Typography component="span" variant="body1" color="textPrimary"></Typography>
-												{cartItem.album.artist}
-												
-											</React.Fragment>
-										}
-									/>
+									<div className={classes.flexContainer}>
+										<Link to={`/album/${cartItem.album._id}`} style={{ textDecoration: 'none' }}>
+											<div className={classes.flexContainer}>
+												<ListItemAvatar>
+													<Avatar className={classes.albumCover} alt={cartItem.album.name} src={cartItem.album.image} />
+												</ListItemAvatar>
+												<ListItemText
+													className={classes.flex}
+													primary={
+														<React.Fragment>
+															<Typography component="span" variant="subtitle1" color="textPrimary">
+																{cartItem.album.name}
+															</Typography>
+														</React.Fragment>
+													}
+													secondary={
+														<React.Fragment>
+															<Typography component="span" variant="subtitle2" color="textPrimary">
+																{cartItem.album.artist}
+															</Typography>		
+														</React.Fragment>
+													}
+												/>
+											</div>
+										</Link>
+									</div>
 									<Typography component="span" variant="body1" color="textPrimary" className={classes.flex}>
 										${cartItem.album.price}
 									</Typography>
