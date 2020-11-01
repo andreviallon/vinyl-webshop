@@ -24,7 +24,7 @@ const LatestAlbums: React.FC<Props> = ({ albums }) => {
     return (
         <Grid container spacing={3} className={classes.center}>
             {albums?.map((album: IAlbum) => (
-                <Grid item sm={12} md={6} lg={4} xl={3} key={album._id}>
+                <Grid item sm={8} md={4} lg={4} xl={3} key={album._id}>
                     <AlbumCard album={album} />
                 </Grid>
             ))}

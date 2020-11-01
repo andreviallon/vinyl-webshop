@@ -6,7 +6,8 @@ export type CartState = {
 
 export type CartAction = {
 	type: string;
-	cartItem: ICartItem;
+	cartItem?: ICartItem;
+	id?: string;
 };
 
 export type CartDispatchType = (args: CartAction) => CartAction

@@ -13,21 +13,18 @@ export const cartReducer = (state: CartState = initialCartState, action: CartAct
         case actionTypes.CART_ADD_ITEM:
             const item = action.cartItem;
 
-            console.log('item', item);
-            console.log('state.cartItems', state.cartItems);
+            if (item) {
+                const existItem = state.cartItems.find((cartItem) => cartItem.album._id === item.album._id);
 
-            const existItem = state.cartItems.find((cartItem) => cartItem.album._id === item.album._id);
-
-            console.log('existItem', existItem);
-
-            if (existItem) {
-                return { ...state, cartItems: state.cartItems.map(cartItem => cartItem.album === existItem.album ? item : cartItem) };
-            } else {
-                return { ...state, cartItems: [...state.cartItems, item] };
+                if (existItem) {
+                    return { ...state, cartItems: state.cartItems.map(cartItem => cartItem.album === existItem.album ? item : cartItem) };
+                } else {
+                    return { ...state, cartItems: [...state.cartItems, item] };
+                }
             }
 
         case actionTypes.CART_REMOVE_ITEM:
-            return { ...state };
+            return { ...state, cartItems: state.cartItems.filter(cartItem => cartItem.album._id !== action.id) };
       
         default: return state;
     };

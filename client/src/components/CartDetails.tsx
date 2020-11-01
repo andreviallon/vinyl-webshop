@@ -12,7 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as H from "history";
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../state/cart/cartActions';
+import { addToCart, removeFromCart } from '../state/cart/cartActions';
 import { IState } from '../state/store';
 import Button from '@material-ui/core/Button/Button';
 import { Link } from 'react-router-dom';
@@ -65,8 +65,8 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
     const dispatch = useDispatch();
     const { cartItems } = useSelector((state: IState) => state.cart);
 
-    const removeFromCartHandler = (id?: string) => {
-        // dispatch(removeFromCart(id))
+    const removeFromCartHandler = (id: string) => {
+        dispatch(removeFromCart(id));
     }
 
     const checkoutHandler = () => {
