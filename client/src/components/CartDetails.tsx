@@ -69,7 +69,7 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
         dispatch(removeFromCart(id));
     }
 
-    const checkoutHandler = () => {
+    const navigateToCheckout = () => {
         history.push('/login?redirect=shipping')
 	}
 
@@ -86,7 +86,7 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
 			<Grid item xs={12}>
 				<div className={classes.header}>
 					<Typography component="h5" variant="h5">Shopping Cart ({cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)})</Typography>
-					<Button variant="contained" color="primary" disableElevation>
+					<Button variant="contained" color="primary" disableElevation onClick={navigateToCheckout}>
 						Proceed to checkout
 						${cartItems.reduce((acc, item) => acc + item.quantity * item.album.price, 0).toFixed(2)}
 					</Button>

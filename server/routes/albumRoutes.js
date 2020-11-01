@@ -1,23 +1,9 @@
 import express from 'express';
-import asyncHandler from 'express-async-handler';
-import Album from '../models/albumModel.js';
+import { getAlbums, getAlbum } from '../controllers/albumController.js';
 
 const router = express.Router();
 
-router.get('/', asyncHandler(async (req, res) => {
-    const albums = await Album.find({})
-    res.json(albums);
-}));
-
-router.get('/:id', asyncHandler(async (req, res) => {
-    const album = await Album.findById(req.params.id);
-
-    if (album) {
-        res.json(album);
-    } else {
-        res.status(404);
-        throw new Error('Album not found');
-    }
-}));
+router.route('/').get(getAlbums);
+router.route('/:id').get(getAlbum);
 
 export default router;
