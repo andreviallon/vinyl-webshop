@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../state/cart/cartActions';
 import { IState } from '../state/store';
 import Button from '@material-ui/core/Button/Button';
-import { ICartItem } from '../models/cartModel';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,9 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
         quantity: {
             minWidth: 120
-		},
-		title: {
-			marginBottom: theme.spacing(2)
 		},
 		formControl: {
 			margin: theme.spacing(1),
@@ -72,7 +68,6 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
         history.push('/login?redirect=shipping')
 	}
 
-
     useEffect(() => {
         if(albumId) {
             dispatch(addToCart(albumId, quantity));
@@ -85,7 +80,7 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
 				<div className={classes.header}>
-					<Typography component="h5" variant="h5" className={classes.title}>Shopping Cart ({cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)})</Typography>
+					<Typography component="h5" variant="h5">Shopping Cart ({cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)})</Typography>
 					<Button variant="contained" color="primary" disableElevation>
 						Proceed to checkout
 						${cartItems.reduce((acc, item) => acc + item.quantity * item.album.price, 0).toFixed(2)}
@@ -95,6 +90,7 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
 					<List>
 						{cartItems.map((cartItem, index) => (
 							<div key={index}>
+								<Divider component="li" />
 								<ListItem>
 									<ListItemAvatar>
 										<Avatar className={classes.albumCover} alt={cartItem.album.name} src={cartItem.album.image} />
@@ -115,7 +111,7 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
 									</Typography>
 									<FormControl className={classes.formControl}>
 										<Select
-										value={quantity}
+										value={cartItem.quantity}
 										onChange={ (e) =>dispatch(addToCart(cartItem.album._id, Number(e.target.value))) }
 										displayEmpty
 										inputProps={{ "aria-label": "Without label" }}
@@ -129,7 +125,6 @@ const CartDetails: React.FC<Props> = ({ match, location, history }) => {
 										<DeleteIcon />
 									</IconButton>
 								</ListItem>
-								<Divider component="li" />
 							</div>
 						))}
 					</List>
