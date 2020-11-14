@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../state/cart/cartActions';
-import { IState } from '../state/store';
 import CartDetails from '../components/CartDetails';
 
 interface Props {
