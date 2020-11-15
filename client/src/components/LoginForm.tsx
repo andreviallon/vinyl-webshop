@@ -39,25 +39,25 @@ interface Props {
 
 const LoginForm: React.FC<Props> = ({ location, history }) => {
     const classes = useStyles();
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const dispatch = useDispatch()
-    const userLogin = useSelector((state: IState) => state.userLogin)
-    const { loading, error, user } = userLogin
+    const dispatch = useDispatch();
+    const userLogin = useSelector((state: IState) => state.userLogin);
+    const { loading, error, user } = userLogin;
 
-    // const redirect = location.search ? location.search.split('=')[1] : '/'
+    const redirect = location.search ? location.search.split('=')[1] : '/';
 
-
-    // useEffect(() => {
-    //     if (user) {
-    //         history.push(redirect)
-    //     }
-    // }, [history, user, redirect])
+    useEffect(() => {
+        if (user) {
+            history.push(redirect);
+        }
+    }, [history, user, redirect]);
 
     const submitHandler = (e: any) => {
-        e.preventDefault()
-        dispatch(login(email, password))
+        e.preventDefault();
+        console.log('submit', email, password);
+        dispatch(login(email, password));
     }
 
     return (
@@ -67,25 +67,22 @@ const LoginForm: React.FC<Props> = ({ location, history }) => {
                     <Typography variant="h4">
                         Login
                     </Typography>
-                    <form className={classes.root} noValidate autoComplete="off">
+                    <form className={classes.root} onSubmit={submitHandler}>
                         <TextField className={classes.input} label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    </form>
-
-                    <form className={classes.root} noValidate autoComplete="off">
                         <TextField className={classes.input} label="Password" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    </form>
 
-                    <div className={classes.buttonRow}>
-                        <Button variant="contained" color="primary" disableElevation>Login</Button>
-                        {loading &&
-                            <CircularProgress className={classes.loader} />
-                        }
-                    </div>
-                    <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <Typography variant="subtitle1">
-                            Do not have an account? <strong>Register</strong>
-					    </Typography>
-                    </Link>
+                        <div className={classes.buttonRow}>
+                            <Button variant="contained" color="primary" disableElevation type="submit">Login</Button>
+                            {loading &&
+                                <CircularProgress className={classes.loader} />
+                            }
+                        </div>
+                        <Link to='/signup' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                            <Typography variant="subtitle1">
+                                Do not have an account? <strong>Register</strong>
+                            </Typography>
+                        </Link>
+                    </form>
                 </Grid>
             </Grid>
             { !loading && error && <SnackbarMessage severity={severity.ERROR} message={error} /> }
