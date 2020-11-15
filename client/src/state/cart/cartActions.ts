@@ -2,7 +2,6 @@ import { CartDispatchType } from './cartStateModel';
 import * as actionTypes from "./cartActionTypes"
 import { IState } from '../store';
 import axios from 'axios';
-import { IAlbum } from '../../models/albumModel';
 
 export const addToCart = (id?: string, quantity?: number) => async (dispatch: CartDispatchType, getState: () => IState) => {
     const { data } = await axios.get(`/api/albums/${id}`);

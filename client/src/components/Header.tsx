@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCard from '@material-ui/icons/ShoppingCart';
 import { Link } from 'react-router-dom';
+import { Badge } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { IState } from '../state/store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,13 +18,15 @@ const useStyles = makeStyles((theme: Theme) =>
 		justifyContent: 'space-between'
     },
     menuButton: {
-      marginRight: theme.spacing(1)
+	  marginLeft: theme.spacing(1),
+	  marginRight: theme.spacing(1)
     }
   })
 );
 
 const Header = () => {
 	const classes = useStyles();
+	const { cartItems } = useSelector((state: IState) => state.cart);
 
 	return (
 		<AppBar position="static">
@@ -34,14 +39,16 @@ const Header = () => {
 				<div>
 					<Link to='/cart' style={{ color: 'inherit', textDecoration: 'inherit'}}>
 						<Button color="inherit" className={classes.menuButton}>
-							<ShoppingCard className={classes.menuButton} />
 							Cart
+							<Badge badgeContent={cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)} color="secondary">
+								<ShoppingCard className={classes.menuButton} />
+							</Badge>
 						</Button>
 					</Link>
 					<Link to='/login' style={{ color: 'inherit', textDecoration: 'inherit'}}>
 						<Button color="inherit">
-							<AccountCircle className={classes.menuButton} />
 							Login
+							<AccountCircle className={classes.menuButton} />
 						</Button>
 					</Link>
 				</div>
