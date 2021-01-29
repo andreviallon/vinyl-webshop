@@ -5,7 +5,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      marginTop: '2rem'
+      marginTop: '6rem'
     }
   }),
 );

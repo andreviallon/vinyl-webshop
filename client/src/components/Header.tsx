@@ -14,6 +14,10 @@ import { logout } from '../state/user/userActions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+	headerContainer: {
+		position: 'fixed',
+		top: '0'
+	},
     header: {
 		display: 'flex',
 		justifyContent: 'space-between'
@@ -50,7 +54,7 @@ const Header = () => {
 	};
 
 	return (
-		<AppBar position="static">
+		<AppBar className={classes.headerContainer}>
 			<Toolbar className={classes.header}>
 				<Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>
 					<Typography variant="h6">
