@@ -19,7 +19,7 @@ const AlbumPage = ({ history, match }: RouteComponentProps<Props>) => {
 
     useEffect(() => {
         dispatch(listAlbumDetails(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     return (
         <>

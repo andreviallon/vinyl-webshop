@@ -24,3 +24,15 @@ export const userLoginReducer = (state: UserState = initialCartState, action: Us
         default: return state;
     };
 };
+
+export const userRegisterReducer = (state: UserState = initialCartState, action: UserAction): UserState => {
+    switch (action.type) {
+        case actionTypes.USER_REGISTER_REQUEST:
+            return { ...state, loading: true, user: undefined, error: undefined }
+        case actionTypes.USER_REGISTER_SUCCESS:
+            return { ...state, loading: true, user: action.user, error: undefined }
+        case actionTypes.USER_REGISTER_FAIL:
+            return { ...state, loading: false, user: action.user, error: action.error }
+        default: return state;
+    };
+};

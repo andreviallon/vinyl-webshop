@@ -22,10 +22,8 @@ export const cartReducer = (state: CartState = initialCartState, action: CartAct
                     return { ...state, cartItems: [...state.cartItems, item] };
                 }
             }
-
         case actionTypes.CART_REMOVE_ITEM:
             return { ...state, cartItems: state.cartItems.filter(cartItem => cartItem.album._id !== action.id) };
-      
         default: return state;
     };
 };
