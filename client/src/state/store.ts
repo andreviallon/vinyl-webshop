@@ -8,13 +8,14 @@ import { AlbumListState } from './albumList/albumListStateModel';
 import { cartReducer } from './cart/cartReducers';
 import { CartState } from './cart/cartStateModel';
 import { userLoginReducer, userRegisterReducer } from './user/userReducers';
-import { UserState } from './user/userStateModel';
+import { UserState, UserRegisterState } from './user/userStateModel';
 
 export interface IState {
     albumList: AlbumListState,
     albumDetails: AlbumDetailsState,
     cart: CartState,
-    userLogin: UserState
+    userLogin: UserState,
+    userRegister: UserRegisterState
 }
 
 export const rootReducer = combineReducers({

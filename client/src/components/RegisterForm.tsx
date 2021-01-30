@@ -42,23 +42,30 @@ const RegisterForm: React.FC<Props> = ({ location, history }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const dispatch = useDispatch();
-    const userLogin = useSelector((state: IState) => state.userLogin);
-    const { loading, error, user } = userLogin;
+    const userRegister = useSelector((state: IState) => state.userRegister);
+    const { loading, error, userInfo } = userRegister;
 
     const redirect = location.search ? location.search.split('=')[1] : '/';
 
     useEffect(() => {
-        if (user) {
+        if (userInfo) {
             history.push(redirect);
         }
-    }, [history, user, redirect]);
+    }, [history, userInfo, redirect]);
 
     const submitHandler = (e: any) => {
+        setErrorMessage('');
         e.preventDefault();
-        console.log('submit', name, email, password);
-        dispatch(register(name, email, password));
+
+        if(password !== confirmPassword) {
+            setErrorMessage('Passwords do not match');
+        } else {
+            dispatch(register(name, email, password));
+        }
     }
 
     return (
@@ -72,6 +79,7 @@ const RegisterForm: React.FC<Props> = ({ location, history }) => {
                         <TextField className={classes.input} label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
                         <TextField className={classes.input} label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} />
                         <TextField className={classes.input} label="Password" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <TextField className={classes.input} label="Password" variant="outlined" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 
                         <div className={classes.buttonRow}>
                             <Button variant="contained" color="primary" disableElevation type="submit">Sign up</Button>
@@ -86,6 +94,7 @@ const RegisterForm: React.FC<Props> = ({ location, history }) => {
                 </Grid>
             </Grid>
             { !loading && error && <SnackbarMessage severity={severity.ERROR} message={error} />}
+            { errorMessage && <SnackbarMessage severity={severity.ERROR} message={errorMessage} />}
         </div>
     )
 }
