@@ -3,7 +3,7 @@ import { Button, CircularProgress, createStyles, Grid, makeStyles, TextField, Th
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../state/store';
-import { login } from '../state/user/userActions';
+import { register } from '../state/user/userActions';
 import SnackbarMessage, { severity } from './SnackbarMessage';
 import * as H from "history";
 
@@ -37,8 +37,9 @@ interface Props {
     history: H.History;
 }
 
-const LoginForm: React.FC<Props> = ({ location, history }) => {
+const RegisterForm: React.FC<Props> = ({ location, history }) => {
     const classes = useStyles();
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -56,7 +57,8 @@ const LoginForm: React.FC<Props> = ({ location, history }) => {
 
     const submitHandler = (e: any) => {
         e.preventDefault();
-        dispatch(login(email, password));
+        console.log('submit', name, email, password);
+        dispatch(register(name, email, password));
     }
 
     return (
@@ -64,29 +66,28 @@ const LoginForm: React.FC<Props> = ({ location, history }) => {
             <Grid container spacing={3}>
                 <Grid item xs={12} md={8} className={classes.center}>
                     <Typography variant="h4">
-                        Login
+                        Sign up
                     </Typography>
                     <form className={classes.root} onSubmit={submitHandler}>
+                        <TextField className={classes.input} label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
                         <TextField className={classes.input} label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} />
                         <TextField className={classes.input} label="Password" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
                         <div className={classes.buttonRow}>
-                            <Button variant="contained" color="primary" disableElevation type="submit">Login</Button>
-                            {loading &&
-                                <CircularProgress className={classes.loader} />
-                            }
+                            <Button variant="contained" color="primary" disableElevation type="submit">Sign up</Button>
+                            {loading && <CircularProgress className={classes.loader} /> }
                         </div>
-                        <Link to='/register' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        <Link to='/login' style={{ color: 'inherit', textDecoration: 'inherit' }}>
                             <Typography variant="subtitle1">
-                                Do not have an account? <strong>Register</strong>
+                                Already have an account? <strong>Login</strong>
                             </Typography>
                         </Link>
                     </form>
                 </Grid>
             </Grid>
-            { !loading && error && <SnackbarMessage severity={severity.ERROR} message={error} /> }
+            { !loading && error && <SnackbarMessage severity={severity.ERROR} message={error} />}
         </div>
     )
 }
 
-export default LoginForm
+export default RegisterForm
