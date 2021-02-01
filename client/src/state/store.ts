@@ -7,15 +7,16 @@ import { albumListReducer } from './albumList/albumListReducers';
 import { AlbumListState } from './albumList/albumListStateModel';
 import { cartReducer } from './cart/cartReducers';
 import { CartState } from './cart/cartStateModel';
-import { userLoginReducer, userRegisterReducer } from './user/userReducers';
-import { UserState, UserRegisterState } from './user/userStateModel';
+import { userLoginReducer, userRegisterReducer, userDetailsReducer } from './user/userReducers';
+import { UserState, UserRegisterState, UserDetailsState } from './user/userStateModel';
 
 export interface IState {
     albumList: AlbumListState,
     albumDetails: AlbumDetailsState,
     cart: CartState,
     userLogin: UserState,
-    userRegister: UserRegisterState
+    userRegister: UserRegisterState,
+    userDetails: UserDetailsState
 }
 
 export const rootReducer = combineReducers({
@@ -23,7 +24,8 @@ export const rootReducer = combineReducers({
     albumDetails: albumDetailsReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
-    userRegister: userRegisterReducer
+    userRegister: userRegisterReducer,
+    userDetails: userDetailsReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>

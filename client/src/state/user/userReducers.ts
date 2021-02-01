@@ -1,4 +1,4 @@
-import { UserAction, UserRegisterAction, UserRegisterState, UserState } from './userStateModel';
+import { UserAction, UserDetailsState, UserRegisterAction, UserRegisterState, UserState, UserDetailsAction } from './userStateModel';
 import * as actionTypes from './userActionTypes';
 
 const userFromLocalStorage = localStorage.getItem('userInfo');
@@ -14,6 +14,12 @@ export const initialUserLoginState: UserState = {
 export const initialUserRegisterState: UserRegisterState = {
     loading: false,
     userInfo: undefined,
+    error: undefined
+};
+
+export const initialUserDetailsState: UserDetailsState = {
+    loading: false,
+    userDetails: undefined,
     error: undefined
 };
 
@@ -36,9 +42,21 @@ export const userRegisterReducer = (state: UserRegisterState = initialUserRegist
         case actionTypes.USER_REGISTER_REQUEST:
             return { ...state, loading: true, userInfo: undefined, error: undefined }
         case actionTypes.USER_REGISTER_SUCCESS:
-            return { ...state, loading: true, userInfo: action.userInfo, error: undefined }
+            return { ...state, loading: false, userInfo: action.userInfo, error: undefined }
         case actionTypes.USER_REGISTER_FAIL:
             return { ...state, loading: false, userInfo: action.userInfo, error: action.error }
+        default: return state;
+    };
+};
+
+export const userDetailsReducer = (state: UserDetailsState = initialUserDetailsState, action: UserDetailsAction): UserDetailsState => {
+    switch (action.type) {
+        case actionTypes.USER_DETAILS_REQUEST:
+            return { ...state, loading: true, userDetails: undefined, error: undefined }
+        case actionTypes.USER_DETAILS_SUCCESS:
+            return { ...state, loading: false, userDetails: action.userDetails, error: undefined }
+        case actionTypes.USER_DETAILS_FAIL:
+            return { ...state, loading: false, userDetails: action.userDetails, error: action.error }
         default: return state;
     };
 };

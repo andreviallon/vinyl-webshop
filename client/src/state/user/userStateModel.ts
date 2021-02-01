@@ -1,4 +1,3 @@
-import { IUserOptions } from "@testing-library/user-event";
 import { IUser } from "../../models/userModel";
 
 export type UserState = {
@@ -9,6 +8,12 @@ export type UserState = {
 
 export type UserRegisterState = {
     userInfo?: IUser;
+    loading: boolean;
+    error?: string;
+};
+
+export type UserDetailsState = {
+    userDetails?: IUser;
     loading: boolean;
     error?: string;
 };
@@ -25,6 +30,14 @@ export type UserRegisterAction = {
     error?: string;
 };
 
+export type UserDetailsAction = {
+    type: string;
+    userDetails?: IUser;
+    error?: string;
+};
+
 export type UserDispatchType = (args: UserAction) => UserAction;
 
 export type UserRegisterDispatchType = (args: UserRegisterAction) => UserRegisterAction;
+
+export type UserDetailsDispatchType = (args: UserDetailsAction) => UserDetailsAction;
