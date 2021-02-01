@@ -7,6 +7,7 @@ import AlbumPage from './pages/AlbumPage';
 import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/register' component={RegisterPage} exact />
         <Route path='/album/:id' component={AlbumPage} />
         <Route path='/cart/:id?' component={CartPage} />
+        <Route path='/profile' component={ProfilePage} />
       </PageWrapper>
     </Router>
   );
