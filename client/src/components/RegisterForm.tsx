@@ -79,7 +79,7 @@ const RegisterForm: React.FC<Props> = ({ location, history }) => {
                         <TextField className={classes.input} label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
                         <TextField className={classes.input} label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} />
                         <TextField className={classes.input} label="Password" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <TextField className={classes.input} label="Password" variant="outlined" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                        <TextField className={classes.input} label="Confirm Password" variant="outlined" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 
                         <div className={classes.buttonRow}>
                             <Button variant="contained" color="primary" disableElevation type="submit">Sign up</Button>

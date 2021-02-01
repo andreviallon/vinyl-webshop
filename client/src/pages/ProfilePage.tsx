@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../state/store';
 import { RouteComponentProps } from 'react-router-dom';
 import { getUserDetails } from '../state/user/userActions';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -39,47 +39,22 @@ function tabProps(index: any) {
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-        display: 'flex'
+        backgroundColor: theme.palette.background.paper
     },
     tabPenalContainer: {
         flexGrow: 1
     },
-    loader: {
-        display: 'flex',
-        justifyContent: 'center'
+    center: {
+        margin: '0 auto'
     }
 }));
 
 const ProfilePage = ({ location, history }: RouteComponentProps) => {
     const classes = useStyles();
     const [tab, setTab] = useState(0);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-
+    
     const dispatch = useDispatch();
     const userDetailsState = useSelector((state: IState) => state.userDetails);
-    const { loading, userDetails, error } = userDetailsState;
-
-    useEffect(() => {
-        if (!userDetails) {
-            // history.push('/login')
-        } else {
-            if (!userDetails.name) {
-                dispatch(getUserDetails('profile'));
-            } else {
-                setName(userDetails.name)
-                setEmail(userDetails.email)
-            }
-        }
-    }, [dispatch, history, userDetails])
-
-
-    console.log('userDetails', userDetails);
 
     const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
         setTab(newValue);
@@ -87,23 +62,21 @@ const ProfilePage = ({ location, history }: RouteComponentProps) => {
 
     return (
         <div className={classes.root}>
-            <Tabs orientation="vertical" variant="scrollable" value={tab} onChange={handleChange} aria-label="Vertical tabs example">
+            <Tabs value={tab} onChange={handleChange} aria-label="simple tabs example">
                 <Tab label="Profile" {...tabProps(0)} />
-                <Tab label="Orders" {...tabProps(1)} />
+                <Tab label="Order History" {...tabProps(1)} />
             </Tabs>
             <div className={classes.tabPenalContainer}>
-                <TabPanel tab={tab} index={0}>
-                    {loading ? 
-                        <div className={classes.loader}>
-                            <CircularProgress />
-                        </div>
-                    :
-                        <UserProfile />
-                    }
-                </TabPanel>
-                <TabPanel tab={tab} index={1}>
-                    <p>Order history will go here</p>
-                </TabPanel>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={10} className={classes.center}>
+                        <TabPanel tab={tab} index={0}>
+                            <UserProfile location={location} history={history} />
+                        </TabPanel>
+                        <TabPanel tab={tab} index={1}>
+                            <p>Order history will go here</p>
+                        </TabPanel>
+                    </Grid>
+                </Grid>
             </div>
         </div>
     );
