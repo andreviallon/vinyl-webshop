@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
 	},
 	menu: {
 		marginTop: theme.spacing(2)
+	},
+	userName: {
+		textTransform: 'capitalize'
 	}
   })
 );
@@ -72,7 +75,7 @@ const Header = () => {
 					</Link>
 					{ user ? (
 						<>
-							<Button color="inherit" aria-haspopup="true" onClick={handleOpen}>
+							<Button className={classes.userName} color="inherit" aria-haspopup="true" onClick={handleOpen}>
 								{user.name}
 								<AccountCircle className={classes.menuButton} />
 							</Button>
