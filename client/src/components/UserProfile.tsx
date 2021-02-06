@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button, CircularProgress, createStyles, makeStyles, TextField, Theme } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../state/store';
-import { getUserDetails, register } from '../state/user/userActions';
+import { getUserDetails, updateUserProfile } from '../state/user/userActions';
 import SnackbarMessage, { severity } from './SnackbarMessage';
 import * as H from "history";
+import { IUser } from '../models/userModel';
+import * as userActionTypes from "../state/user/userActionTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -44,21 +46,26 @@ const UserProfile: React.FC<Props> = ({ location, history }) => {
     const dispatch = useDispatch();
 
     const userDetailsState = useSelector((state: IState) => state.userDetails);
-    const { loading, userDetails, error } = userDetailsState;
+    const { loading, userDetails, error, updateSuccess } = userDetailsState;
+
+    const userLogin = useSelector((state: IState) => state.userLogin);
+    const { user } = userLogin;
+
+
 
     useEffect(() => {
-        if (!userDetails) {
-            console.log('userDetails', userDetails);
-            // history.push('/login')
+        if (!user) {
+            history.push('/login');
         } else {
             if (!userDetails?.name) {
+                dispatch({ type: userActionTypes.USER_UPDATE_PROFILE_RESET });
                 dispatch(getUserDetails('profile'));
             } else {
-                setName(userDetails?.name)
-                setEmail(userDetails?.email)
+                setName(userDetails?.name);
+                setEmail(userDetails?.email);
             }
         }
-    }, [dispatch, history, userDetails])
+    }, [dispatch, history, userDetails]);
 
 
     const submitHandler = (e: any) => {
@@ -67,8 +74,9 @@ const UserProfile: React.FC<Props> = ({ location, history }) => {
 
         if (password !== confirmPassword) {
             setErrorMessage('Passwords do not match');
-        } else {
-            dispatch(register(name, email, password));
+        } else if(userDetails) {
+            const updatedUser: Partial<IUser> = { _id: userDetails?._id, name, email, password };
+            dispatch(updateUserProfile(updatedUser));
         }
     }
 
@@ -85,6 +93,7 @@ const UserProfile: React.FC<Props> = ({ location, history }) => {
                     {loading && <CircularProgress className={classes.loader} />}
                 </div>
             </form>
+            { updateSuccess && <SnackbarMessage severity={severity.SUCCESS} message={'Your profile was updated'} />}
             { error && <SnackbarMessage severity={severity.ERROR} message={error} />}
             { errorMessage && <SnackbarMessage severity={severity.ERROR} message={errorMessage} />}
         </div>

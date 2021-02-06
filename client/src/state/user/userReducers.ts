@@ -20,7 +20,8 @@ export const initialUserRegisterState: UserRegisterState = {
 export const initialUserDetailsState: UserDetailsState = {
     loading: false,
     userDetails: undefined,
-    error: undefined
+    error: undefined,
+    updateSuccess: false
 };
 
 export const userLoginReducer = (state: UserState = initialUserLoginState, action: UserAction): UserState => {
@@ -57,6 +58,18 @@ export const userDetailsReducer = (state: UserDetailsState = initialUserDetailsS
             return { ...state, loading: false, userDetails: action.userDetails, error: undefined }
         case actionTypes.USER_DETAILS_FAIL:
             return { ...state, loading: false, userDetails: action.userDetails, error: action.error }
+        default: return state;
+    };
+};
+
+export const userUpdateProfileReducer = (state: UserDetailsState = initialUserDetailsState, action: UserDetailsAction): UserDetailsState => {
+    switch (action.type) {
+        case actionTypes.USER_UPDATE_PROFILE_REQUEST:
+            return { ...state, loading: true, error: undefined }
+        case actionTypes.USER_DETAILS_SUCCESS:
+            return { ...state, loading: false, userDetails: action.userDetails, error: undefined, updateSuccess: true }
+        case actionTypes.USER_DETAILS_FAIL:
+            return { ...state, loading: false, error: action.error }
         default: return state;
     };
 };

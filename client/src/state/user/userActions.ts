@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { UserDetailsDispatchType, UserDispatchType, UserRegisterDispatchType } from "./userStateModel";
+import { UserDetailsDispatchType, UserDispatchType, UserRegisterDispatchType, UserUpdateProfileDispatchType } from "./userStateModel";
 import * as actionTypes from "./userActionTypes";
 import { IState } from '../store';
+import { IUser } from '../../models/userModel';
 
 export const login = (email: string, password: string) => async (dispatch: UserDispatchType) => {
     try {
@@ -36,7 +37,7 @@ export const logout = () => async (dispatch: UserDispatchType) => {
 
     dispatch({
         type: actionTypes.USER_LOGOUT
-    })
+    });
 }
 
 
@@ -103,6 +104,36 @@ export const getUserDetails = (id: string) => async (dispatch: UserDetailsDispat
         dispatch({
             type: actionTypes.USER_DETAILS_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    }
+};
+
+export const updateUserProfile = (updatedUser: Partial<IUser>) => async (dispatch: UserUpdateProfileDispatchType, getState: () => IState) => {
+    try {
+        dispatch({
+            type: actionTypes.USER_UPDATE_PROFILE_REQUEST
+        });
+
+        const { userLogin: { user } } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user?.token}`
+            }
+        }
+
+        const { data } = await axios.put(`/api/users/profile`, updatedUser, config);
+
+        console.log('data', data);
+
+        dispatch({
+            type: actionTypes.USER_UPDATE_PROFILE_SUCCESS,
+            userDetails: data
         })
+    } catch (error) {
+        dispatch({
+            type: actionTypes.USER_UPDATE_PROFILE_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
+        });
     }
 };

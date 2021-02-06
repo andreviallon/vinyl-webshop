@@ -16,6 +16,7 @@ export type UserDetailsState = {
     userDetails?: IUser;
     loading: boolean;
     error?: string;
+    updateSuccess: boolean
 };
 
 export type UserAction = {
@@ -34,6 +35,7 @@ export type UserDetailsAction = {
     type: string;
     userDetails?: IUser;
     error?: string;
+    updateSuccess?: boolean;
 };
 
 export type UserDispatchType = (args: UserAction) => UserAction;
@@ -41,3 +43,5 @@ export type UserDispatchType = (args: UserAction) => UserAction;
 export type UserRegisterDispatchType = (args: UserRegisterAction) => UserRegisterAction;
 
 export type UserDetailsDispatchType = (args: UserDetailsAction) => UserDetailsAction;
+
+export type UserUpdateProfileDispatchType = (args: UserDetailsAction) => UserDetailsAction;
