@@ -43,5 +43,3 @@ export type UserDispatchType = (args: UserAction) => UserAction;
 export type UserRegisterDispatchType = (args: UserRegisterAction) => UserRegisterAction;
 
 export type UserDetailsDispatchType = (args: UserDetailsAction) => UserDetailsAction;
-
-export type UserUpdateProfileDispatchType = (args: UserDetailsAction) => UserDetailsAction;

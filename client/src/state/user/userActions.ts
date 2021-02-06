@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserDetailsDispatchType, UserDispatchType, UserRegisterDispatchType, UserUpdateProfileDispatchType } from "./userStateModel";
+import { UserDetailsDispatchType, UserDispatchType, UserRegisterDispatchType } from "./userStateModel";
 import * as actionTypes from "./userActionTypes";
 import { IState } from '../store';
 import { IUser } from '../../models/userModel';
@@ -108,7 +108,7 @@ export const getUserDetails = (id: string) => async (dispatch: UserDetailsDispat
     }
 };
 
-export const updateUserProfile = (updatedUser: Partial<IUser>) => async (dispatch: UserUpdateProfileDispatchType, getState: () => IState) => {
+export const updateUserProfile = (updatedUser: Partial<IUser>) => async (dispatch: UserDetailsDispatchType, getState: () => IState) => {
     try {
         dispatch({
             type: actionTypes.USER_UPDATE_PROFILE_REQUEST
