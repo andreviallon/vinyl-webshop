@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import UserProfile from '../components/UserProfile';
-import { useDispatch, useSelector } from 'react-redux';
-import { IState } from '../state/store';
 import { RouteComponentProps } from 'react-router-dom';
-import { getUserDetails } from '../state/user/userActions';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -52,9 +49,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProfilePage = ({ location, history }: RouteComponentProps) => {
     const classes = useStyles();
     const [tab, setTab] = useState(0);
-    
-    const dispatch = useDispatch();
-    const userDetailsState = useSelector((state: IState) => state.userDetails);
 
     const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
         setTab(newValue);

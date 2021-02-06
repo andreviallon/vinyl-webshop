@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, CircularProgress, createStyles, Grid, makeStyles, TextField, Theme, Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Button, CircularProgress, createStyles, makeStyles, TextField, Theme } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../state/store';
 import { getUserDetails, register } from '../state/user/userActions';
@@ -86,6 +85,7 @@ const UserProfile: React.FC<Props> = ({ location, history }) => {
                     {loading && <CircularProgress className={classes.loader} />}
                 </div>
             </form>
+            { error && <SnackbarMessage severity={severity.ERROR} message={error} />}
             { errorMessage && <SnackbarMessage severity={severity.ERROR} message={errorMessage} />}
         </div>
     )
